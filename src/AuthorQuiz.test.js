@@ -16,5 +16,10 @@ describe('When setting up testing', () => {
     expect(1 + 1).toBe(3);
   });
 });
+describe('When testing directly', () => {
+  it("should fail", () => {
+    expect(1 + 1).toBe(3);
+  });
+});
 
 
