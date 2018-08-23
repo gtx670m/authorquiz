@@ -1,25 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import App from './App';
+import Enzyme, { shallow } from "enzyme";
+import Adapter from 'enzyme-adapter-react-16';
+import AuthorQuiz from "./AuthorQuiz";
 
-// it('renders without crashing', () => {
-//   const div = document.createElement('div');
-//   ReactDOM.render(<App />, div);
-//   ReactDOM.unmountComponentAtNode(div);
-// });
-function Hello(props) {
-  return <h1>Hello at {props.now}</h1>
-}
-
-describe('When setting up testing', () => {
-  it("should fail", () => {
-    expect(1 + 1).toBe(3);
+describe("Author Quiz", () => {
+  it("renders without crashing", () => {
+    const div = document.createElement("div");
+    ReactDOM.render(<AuthorQuiz />, div);
   });
 });
-describe('When testing directly', () => {
-  it("should fail", () => {
-    expect(1 + 1).toBe(3);
-  });
-});
-
-

@@ -2,16 +2,21 @@ import React, { Component } from 'react';
 import './App.css';
 import './bootstrap.min.css';
 import PropValidation from './components/PropValidation';
+import Hero from './components/Hero';
+import Turn from './components/Turn';
+import Continue from './components/Continue';
+import Footer from './components/Footer';
 
-class AuthorQuiz extends Component {
-  render() {
-    return (
-      <div>
-        Author Quiz
-        <PropValidation a={'a'} b={2} />
-      </div>
-    );
-  }
+function AuthorQuiz({ turnData }) {
+  return (
+    <div class="container-fluid">
+      <Hero />
+      <Turn {...turnData} />
+      <Continue />
+      {/* <PropValidation a={5} b={2} /> */}
+      <Footer />
+    </div >
+  );
 }
 
 export default AuthorQuiz;

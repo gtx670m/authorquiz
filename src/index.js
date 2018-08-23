@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import AuthorQuiz from './AuthorQuiz';
 import registerServiceWorker from './registerServiceWorker';
+import { state } from './data';
 
-ReactDOM.render(<AuthorQuiz />, document.getElementById('root'));
+ReactDOM.render(<AuthorQuiz {...state} />, document.getElementById('root'));
 registerServiceWorker();
