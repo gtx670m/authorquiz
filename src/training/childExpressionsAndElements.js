@@ -1,3 +1,4 @@
+/* eslint-disable */
 function Sum({ a, b }) {
   return <h1>{a} + {b} = {a + b}</h1>;
 }

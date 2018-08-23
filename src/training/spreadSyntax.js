@@ -1,3 +1,4 @@
+/* eslint-disable */
 function Sum(props) {
   return <h1>
     {props.a} = {props.b} =
