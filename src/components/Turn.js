@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
 import Book from './Book';
-import { authors } from '../data';
+import PropTypes from 'prop-types';
+
+
+// import { authors } from '../data';
 
 class Turn extends Component {
+  setColor() {
+    return {
+      backgroundColor: this.props.backgroundColor
+    }
+  }
   clickHandler = (data) => {
-    console.log(data);
+    this.props.clickHandler(data)
   }
   render() {
     const { author, books } = this.props;
     return (
-      <div className="row turn" style={{ backgroundcolor: "white" }}>
+      <div className="row turn" style={this.setColor()}>
         <div className="col-4 offset-1 books">
           <img src={author.imageUrl} className="authorimage" alt="Author" />
         </div>
@@ -20,6 +28,15 @@ class Turn extends Component {
     );
   }
 }
+Turn.propTypes = {
+  author: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+    imageSource: PropTypes.string.isRequired,
+    books: PropTypes.arrayOf(PropTypes.string).isRequired
+  }),
+  books: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 // function Turn({ author, books }) {
 //   return (

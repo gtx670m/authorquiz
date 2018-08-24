@@ -7,3 +7,5 @@ import { state } from './data';
 
 ReactDOM.render(<AuthorQuiz {...state} />, document.getElementById('root'));
 registerServiceWorker();
+
+
