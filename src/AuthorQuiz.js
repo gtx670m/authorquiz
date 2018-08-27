@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
 import './AuthorQuiz.scss';
 import './bootstrap.min.css';
-// import PropValidation from './components/PropValidation';
+
+import { connect } from 'react-redux';
+import * as actions from './actions';
+
+// import PropValidation from './training/PropValidation';
 import Hero from './components/Hero';
 import Turn from './components/Turn';
 import Continue from './components/Continue';
 import Footer from './components/Footer';
-import DOMEvents from './components/DOMEvents';
-import PreventDefault from './components/PreventDefault';
+import DOMEvents from './training/DOMEvents';
+import PreventDefault from './training/PreventDefault';
 import EvenCounter from './events/EvenCounter';
 import { authors } from './data';
 
-import Form from './components/Form/Form';
-import FormLibrary from './components/Form/FormLibrary';
+import Form from './training/Form';
+import FormLibrary from './training/FormLibrary';
+
+import { Link } from 'react-router-dom';
 
 
 class AuthorQuiz extends Component {
@@ -37,7 +43,16 @@ class AuthorQuiz extends Component {
       });
     }
   }
+
+  onContinue = () => {
+    this.props.onContinue();
+    this.setState({
+      backgroundColor: ""
+    });
+  }
+
   render() {
+
     return (
       <div className="container-fluid" >
         <Hero />
@@ -47,9 +62,11 @@ class AuthorQuiz extends Component {
           clickHandler={data => this.clickHandler(data)}
           backgroundColor={this.state.backgroundColor}
         />
-        <hr />
-        <Continue />
+
+        <Continue show={this.state.backgroundColor === "green"} onContinue={() => this.onContinue()} />
+        {/* <Continue show={true} onContinue={() => this.onContinue()} /> */}
         {/* <PropValidation a={5} b={2} /> */}
+        <p><Link to="/add">Add an author</Link></p>
         <br />
         <DOMEvents />
         <br />
@@ -64,8 +81,6 @@ class AuthorQuiz extends Component {
         <FormLibrary />
         <br />
         <Footer />
-
-
       </div >
     );
   }
@@ -84,4 +99,23 @@ class AuthorQuiz extends Component {
 //   );
 // }
 
-export default AuthorQuiz;
+// export default AuthorQuiz;
+
+const mapStateToProps = state => {
+  return {
+    data: state.data
+  }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    // save_item_dispatch: (task) => {
+    //   dispatch(actions.save_item_action(task));
+    // },
+    // delete_all_dispatch: () => {
+    //   dispatch(actions.delete_all_action());
+    // }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthorQuiz);

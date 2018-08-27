@@ -1,6 +1,7 @@
+import * as types from '../constants/ActionTypes';
 import { shuffle, sample } from 'underscore';
 
-const authors = [
+var initialState = [
   {
     name: 'Mark Twain',
     imageUrl: 'images/authors/marktwain.jpg',
@@ -50,4 +51,12 @@ function getTurnData(authors) {
   }
 }
 
-export { authors, getTurnData };
+
+export default (state = initialState, action) => {
+  switch (action.type) {
+    // case types.CHECK_ANSWER:
+    //   console.log(action);
+    //   return action.task;
+    default: return { state, getTurnData };
+  }
+};
