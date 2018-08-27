@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './AuthorQuiz.scss';
 import './bootstrap.min.css';
-
 import { connect } from 'react-redux';
 import * as actions from './actions';
+
 
 // import PropValidation from './training/PropValidation';
 import Hero from './components/Hero';
@@ -29,20 +29,20 @@ class AuthorQuiz extends Component {
     }
   }
 
-  clickHandler = (data) => {
-    const check = authors.find(author =>
-      author.books.some(title => title === data)
-    )
-    if (check.name === this.props.turnData.author.name) {
-      this.setState({
-        backgroundColor: "green"
-      });
-    } else {
-      this.setState({
-        backgroundColor: "red"
-      });
-    }
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    // var { editing_data } = nextProps;
+    // console.log(editing_data);
+    // if (nextProps) {
+    //   this.setState({
+    //     id: editing_data.id,
+    //     name: editing_data.name,
+    //     date: editing_data.date ? editing_data.date : '',
+    //     status: editing_data.status
+    //   });
+    // }
   }
+
 
   onContinue = () => {
     this.props.onContinue();
@@ -52,14 +52,22 @@ class AuthorQuiz extends Component {
   }
 
   render() {
+    const { answer } = this.props;
 
+    // if (answer) {
+    //   this.setState({
+    //     backgroundColor: "green"
+    //   });
+    // } else {
+    //   this.setState({
+    //     backgroundColor: "red"
+    //   });
+    // }
     return (
       <div className="container-fluid" >
         <Hero />
         <Turn
-          author={this.props.turnData.author}
-          books={this.props.turnData.books}
-          clickHandler={data => this.clickHandler(data)}
+          // clickHandler={() => this.clickHandler()}
           backgroundColor={this.state.backgroundColor}
         />
 
@@ -102,8 +110,9 @@ class AuthorQuiz extends Component {
 // export default AuthorQuiz;
 
 const mapStateToProps = state => {
+  console.log(state);
   return {
-    data: state.data
+    answer: state.check.answer
   }
 }
 
