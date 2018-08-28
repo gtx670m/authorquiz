@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
-import './AuthorQuiz.scss';
-import './bootstrap.min.css';
+import '../../bootstrap.min.css';
 import { connect } from 'react-redux';
 // import * as actions from './actions';
 
-
 // import PropValidation from './training/PropValidation';
-import Hero from './components/Hero';
-import Turn from './components/Turn';
-import Continue from './components/Continue';
-import Footer from './components/Footer';
+import DOMEvents from './DOMEvents';
+import PreventDefault from './PreventDefault';
+import EvenCounter from './EvenCounter';
+
+import Form from './Form';
+import FormLibrary from './FormLibrary';
 
 import { Link } from 'react-router-dom';
 
-
-class AuthorQuiz extends Component {
+class TrainingPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,16 +27,20 @@ class AuthorQuiz extends Component {
   render() {
     return (
       <div className="container-fluid" >
-        <Hero />
-        <Turn />
-        <Continue />
-        {/* <PropValidation a={5} b={2} /> */}
-        <p><Link to="/add">Add an author</Link></p>
-        <hr />
-        <p><Link to="/training">Training page</Link></p>
         <br />
-
-        <Footer />
+        <DOMEvents />
+        <br />
+        <PreventDefault />
+        <hr />
+        <EvenCounter onEvenClick={(data) => {
+          console.log(`even ${data}`);
+        }} />
+        <hr />
+        <Form />
+        <hr />
+        <FormLibrary />
+        <br />
+        <p><Link to="/">Back to Home</Link></p>
       </div >
     );
   }
@@ -68,4 +71,4 @@ const mapDispatchToProps = (dispatch, props) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthorQuiz);
+export default connect(mapStateToProps, mapDispatchToProps)(TrainingPage);

@@ -27,21 +27,24 @@ const state = {
     }
   }
 };
-
+// beforeEach(); Applies to all tests in this file
+// afterEach();
 describe("Author Quiz", () => {
-  it("renders without crashing", () => {
+  it.only("renders without crashing", () => { //test only
     const div = document.createElement("div");
     ReactDOM.render(<AuthorQuiz {...state} />, div);
   });
 
   describe("when no answer has been selected", () => {
+    // beforeEach(); Applies only to tests in this describe block
     let wrapper;
-    beforeAll(() => {
+    beforeAll(() => { //setup before testing
       wrapper = mount(<AuthorQuiz {...state} />)
     });
-    it("should have no background color", () => {
+    xit("should have no background color", () => { //skipped
       expect(wrapper.find("div.row.turn").props().style.backgroundColor).toBe('');
     });
+    // afterAll();
   });
 
   describe("When the wrong answer has been selected", () => {

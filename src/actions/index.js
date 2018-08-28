@@ -7,3 +7,18 @@ export const check_answer = (answer, author) => {
     author
   }
 }
+
+export const continue_act = () => {
+  return {
+    type: types.CONTINUE
+  }
+}
+
+export const add_author = (name, imageUrl, books) => {
+  return {
+    type: types.ADD_AUTHOR,
+    name,
+    imageUrl,
+    books
+  }
+}

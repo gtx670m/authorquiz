@@ -5,22 +5,41 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
-// import { authors } from '../data';
-
 class Turn extends Component {
   constructor(props) {
     super(props);
-    const { state, getTurnData } = this.props.data;
-    const { author, books } = getTurnData(state.data);
+    const { author, books } = this.props.data;
     this.state = {
       author: author,
-      books: books
+      books: books,
+      backgroundColor: ''
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { answer, data } = nextProps;
+    const { author, books } = data;
+    this.setState({
+      author: author,
+      books: books
+    })
+    if (answer === '') {
+      this.setState({
+        backgroundColor: 'white'
+      })
+    } else if (answer) {
+      this.setState({
+        backgroundColor: 'green'
+      })
+    } else {
+      this.setState({
+        backgroundColor: 'red'
+      })
+    }
+  }
   setColor() {
     return {
-      backgroundColor: this.props.backgroundColor
+      backgroundColor: this.state.backgroundColor
     }
   }
   clickHandler = (answer) => {
@@ -40,15 +59,18 @@ class Turn extends Component {
     );
   }
 }
-// Turn.propTypes = {
-//   author: PropTypes.shape({
-//     name: PropTypes.string.isRequired,
-//     imageUrl: PropTypes.string.isRequired,
-//     imageSource: PropTypes.string.isRequired,
-//     books: PropTypes.arrayOf(PropTypes.string).isRequired
-//   }),
-//   books: PropTypes.arrayOf(PropTypes.string).isRequired,
-// };
+Turn.propTypes = {
+  turnData: PropTypes.shape({
+    author: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      imageUrl: PropTypes.string.isRequired,
+      imageSource: PropTypes.string.isRequired,
+      books: PropTypes.arrayOf(PropTypes.string).isRequired
+    }),
+    books: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }),
+  // answer: PropTypes.string.isRequired
+};
 
 // function Turn({ author, books }) {
 //   return (
@@ -65,15 +87,13 @@ class Turn extends Component {
 
 const mapStateToProps = state => {
   return {
-    data: state.data
+    data: state.data.turnData,
+    answer: state.data.answer
   }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    // save_item_dispatch: (task) => {
-    //   dispatch(actions.save_item_action(task));
-    // },
     check_answer_dispatch: (answer, author) => {
       dispatch(actions.check_answer(answer, author));
     }

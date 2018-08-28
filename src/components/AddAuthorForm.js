@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import './AddAuthorForm.scss';
 
+import { connect } from 'react-redux';
+import * as actions from '../actions';
+import { withRouter } from 'react-router-dom';
+
 class AddAuthorForm extends Component {
   constructor(props) {
     super(props);
@@ -29,7 +33,8 @@ class AddAuthorForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.onAddAuthor(this.state);
+    const { name, imageUrl, books } = this.state;
+    this.props.add_author_dispatch(name, imageUrl, books);
   }
 
   handleAddBook = (event) => {
@@ -73,4 +78,18 @@ class AddAuthorForm extends Component {
   }
 }
 
-export default AddAuthorForm;
+const mapStateToProps = state => {
+  return {
+  }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    add_author_dispatch: (name, imageUrl, books) => {
+      dispatch(actions.add_author(name, imageUrl, books));
+      props.history.push('/');
+    }
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AddAuthorForm));
